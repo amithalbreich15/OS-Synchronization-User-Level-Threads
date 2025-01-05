@@ -1,0 +1,62 @@
+yuval.ezraty, amithalbreich
+Yuval Ezraty (316484468), Amit Halbreich (208917393)
+EX: 2
+
+FILES:
+uthreads.cpp
+Makefile
+README
+
+REMARKS:
+
+
+ANSWERS:
+1. a. sigsetjmp receives a buffer, and saves the context
+of the current thread to the buffer, such that it could
+be restored later.siglongjmp receives a buffer and restores the context
+of the saved thread according to the values stored in the
+buffer.
+b. If the second argument of sigsetjmp is nonzero, the
+group of masked signals of the current thread is saved in
+the buffer and will be restored on the matching siglongjmp.
+
+2. When a program performs multiple calculations in the
+same time, without needing to access I/O devices, it
+would be reasonable to use user-level threads because
+the context-switching overhead will be lower than the
+overhead of kernel-level threads, and the user-level
+threads will not be blocked by the OS due to I/O access.
+
+3. Advantages - the tabs are completely separated from
+each other, so they are independent and errors or security events
+that may occur in one tab will not be able to affect another tab.
+Disadvantages - Each tab has separate memory resources,
+which causes the overall memory consumption of Chrome to
+be higher. In addition, the creation time of a new process
+for each tab is higher than the creation time of a new thread.
+
+4. We opened the "Shotwell" application, found its PID
+using "ps -A" and killed the process using "kill PID".
+When typing the "kill PID" line in the shell, each letter
+triggered a hardware interrupt which the OS handled in
+order to provide the shell with the correct letter, and
+then the shell triggered a software interrupt that the OS
+handled in order to show the letter on the screen.
+when the Enter button was pushed, the shell sent a kill
+signal to the Shotwell process. The Shotwell process
+triggered a software interrupt that the OS handled in
+order to recycle the process's resources and to switch
+context to another thread (using the scheduler).
+
+5. Real time is the actual time the CPU takes to
+execute a given task, while virtual time is the time
+it would take the CPU to execute the task if there
+were no interrupts such as I/O or memory access.
+Using Virtual time is preferable when comparing
+the performance of different programs, such that the
+hardware and OS on which the programs are run will not affect
+the result.
+Using real time is preferable when comparing the run
+time of a single program on different operating systems,
+such that the differences between the results will
+reflect the overhead of each OS.
